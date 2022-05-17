@@ -1,0 +1,27 @@
+{
+	"name": "diggers-bot",
+	"version": "1.0.0",
+	"main": "claimbot.js",
+	"license": "MIT",
+	"description": "Auto mining bot for Diggers World",
+	"author": "Benjamin Wheeler <benjiewheeler@yandex.com>",
+	"private": true,
+	"scripts": {
+		"start": "node ."
+	},
+	"dependencies": {
+		"axios": "^0.24.0",
+		"chalk": "^4.1.2",
+		"dotenv": "^10.0.0",
+		"eosjs": "^22.1.0",
+		"lodash": "^4.17.21",
+		"node-fetch": "^2.6.7"
+	},
+	"devDependencies": {
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"nodemon": "^2.0.16",
+		"prettier": "^2.6.2"
+	}
+}
