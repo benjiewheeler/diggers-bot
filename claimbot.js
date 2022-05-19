@@ -367,17 +367,17 @@ async function withdrawTokens(account, privKey) {
 		);
 
 	if (!withdrawables.length) {
-		console.log(`${yellow("Warning")}`, `Not enough tokens to auto-withdraw`, yellow(balances.join(", ")));
+		console.log(`${yellow("Warning")}`, `Not enough tokens to auto-withdraw`, yellow(balance.join(", ")));
 		return;
 	}
 
 	const delay = _.round(_.random(delayMin, delayMax, true), 2);
 
 	console.log(`\tWithdrawing ${yellow(withdrawables.join(", "))}`, `(after a ${Math.round(delay)}s delay)`);
-	const actions = withdrawables.map(quantity => makeWithdrawAction(account, quantity));
+	const action = makeWithdrawAction(account, withdrawables);
 
 	await waitFor(delay);
-	await transact({ account, privKeys: [privKey], actions });
+	await transact({ account, privKeys: [privKey], actions: [action] });
 }
 
 async function depositTokens(account, privKey) {
