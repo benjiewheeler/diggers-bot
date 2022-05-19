@@ -11,11 +11,11 @@ const { TextDecoder, TextEncoder } = require("util");
 require("dotenv").config();
 
 const WAX_ENDPOINTS = _.shuffle([
-	// "https://api.wax.greeneosio.com",
+	"https://api.wax.greeneosio.com",
 	"https://api.waxsweden.org",
 	"https://wax.cryptolions.io",
 	"https://wax.eu.eosamsterdam.net",
-	"https://api-wax.eosarabia.net",
+	// "https://api-wax.eosarabia.net",
 	"https://wax.greymass.com",
 	"https://wax.pink.gg",
 ]);
