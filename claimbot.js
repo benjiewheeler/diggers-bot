@@ -471,6 +471,9 @@ async function runAccounts(accounts) {
 	for (let i = 0; i < accounts.length; i++) {
 		const { account, privKey } = accounts[i];
 		await runTasks(account, privKey);
+		// random delay to break the monotonous cycle
+		// avoid the bot getting stuck wasting time in "5 seconds cooldwon left loop"
+		await waitFor(_.random(5, 15));
 	}
 }
 
