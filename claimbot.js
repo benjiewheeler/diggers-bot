@@ -318,7 +318,7 @@ async function withdrawTokens(account, privKey) {
 
 	shuffleEndpoints();
 
-	const { DELAY_MIN, DELAY_MAX } = process.env;
+	const { MAX_FEE, DELAY_MIN, DELAY_MAX } = process.env;
 	const delayMin = parseFloat(DELAY_MIN) || 4;
 	const delayMax = parseFloat(DELAY_MAX) || 10;
 
@@ -326,11 +326,12 @@ async function withdrawTokens(account, privKey) {
 	const [config] = await fetchTable("diggerswgame", "config", "diggerswgame", null, 1);
 
 	const { min_fee, fee } = config;
+	const maxFee = MAX_FEE == "min_fee" ? min_fee : parseFloat(MAX_FEE);
 
-	if (fee > min_fee) {
+	if (fee > maxFee) {
 		console.log(
 			`${yellow("Warning")}`,
-			`Withdraw fee ${magenta(`(${fee}%)`)} is greater than the minimum fee ${magenta(`(${min_fee}%)`)}`,
+			`Withdraw fee ${magenta(`(${fee}%)`)} is greater than the maximum allowed fee ${magenta(`(${maxFee}%)`)}`,
 			`aborting until next round`
 		);
 		return;
