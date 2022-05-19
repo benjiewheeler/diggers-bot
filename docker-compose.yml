@@ -2,6 +2,7 @@ version: "3.7"
 
 services:
     diggers-bot:
+        container_name: diggers-bot
         build: .
         restart: unless-stopped
         tty: true
