@@ -21,6 +21,7 @@ const WAX_ENDPOINTS = _.shuffle([
 ]);
 
 const Configs = {
+	interval: 5,
 	autoWithdraw: false,
 	withdrawThresholds: [],
 	maxWithdraw: [],
@@ -473,7 +474,7 @@ async function runAccounts(accounts) {
 		await waitFor(_.random(5, 15));
 	}
 
-	setTimeout(() => runAccounts(accounts), interval * 60e3);
+	setTimeout(() => runAccounts(accounts), Configs.interval * 60e3);
 }
 
 (async () => {
@@ -508,7 +509,7 @@ async function runAccounts(accounts) {
 	const { AUTO_WITHDRAW, WITHDRAW_THRESHOLD, MAX_WITHDRAW } = process.env;
 	const { AUTO_DEPOSIT, DEPOSIT_THRESHOLD, MAX_DEPOSIT } = process.env;
 
-	const interval = parseInt(CHECK_INTERVAL) || 15;
+	Configs.interval = parseInt(CHECK_INTERVAL) || 15;
 
 	Configs.autoWithdraw = AUTO_WITHDRAW == 1;
 	Configs.withdrawThresholds = WITHDRAW_THRESHOLD.split(",")
