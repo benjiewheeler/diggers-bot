@@ -454,17 +454,14 @@ async function depositTokens(account, privKey) {
 }
 
 async function runTasks(account, privKey) {
-	await depositTokens(account, privKey);
-	console.log(); // just for clarity
+	const tasks = [depositTokens, repairTools, useTools, withdrawTokens];
 
-	await repairTools(account, privKey);
-	console.log(); // just for clarity
-
-	await useTools(account, privKey);
-	console.log(); // just for clarity
-
-	await withdrawTokens(account, privKey);
-	console.log(); // just for clarity
+	for (let i = 0; i < tasks.length; i++) {
+		const task = tasks[i];
+		await task.call(this, account, privKey);
+		await waitFor(5);
+		console.log(); // just for clarity
+	}
 }
 
 async function runAccounts(accounts) {
@@ -475,6 +472,8 @@ async function runAccounts(accounts) {
 		// avoid the bot getting stuck wasting time in "5 seconds cooldwon left loop"
 		await waitFor(_.random(5, 15));
 	}
+
+	setTimeout(() => runAccounts(accounts), interval * 60e3);
 }
 
 (async () => {
@@ -545,6 +544,4 @@ async function runAccounts(accounts) {
 	console.log();
 
 	runAccounts(accounts);
-
-	setInterval(() => runAccounts(accounts), interval * 60e3);
 })();
