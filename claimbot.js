@@ -541,7 +541,7 @@ async function runAccounts(accounts) {
 	Configs.tools = await fetchTable("diggerswgame", "toolsconfig", "diggerswgame", null, 1);
 
 	console.log(`Diggers World Bot running for ${accounts.map(acc => cyan(acc.account)).join(", ")}`);
-	console.log(`Running every ${interval} minutes`);
+	console.log(`Running every ${Configs.interval} minutes`);
 	console.log();
 
 	runAccounts(accounts);
